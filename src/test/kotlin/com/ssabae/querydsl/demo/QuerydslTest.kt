@@ -64,9 +64,9 @@ internal class QuerydslTest {
         val selectedMember = queryFactory
             .selectFrom(member)
             .where(member.name.eq("member1"))
-            .fetch()
+            .fetchOne()
 
-        val loaded = emf.persistenceUnitUtil.isLoaded(selectedMember)
+        val loaded = emf.persistenceUnitUtil.isLoaded(selectedMember?.team)
 
         assertThat(loaded).isFalse()
     }
