@@ -8,19 +8,19 @@ import javax.persistence.*
  * @date    : 2020-10-04
  */
 @Entity
-class Member {
-
+class Member(
     @Id
     @GeneratedValue
-    var id: Long? = null
+    var id: Long? = null,
 
-    var name: String? = null
+    var name: String? = null,
 
-    var age: Int? = null
+    var age: Int? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     var team: Team? = null
+) {
 
     fun changeTeam(team: Team) {
         this.team = team

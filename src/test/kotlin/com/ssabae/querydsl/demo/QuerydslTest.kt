@@ -27,15 +27,17 @@ import javax.persistence.PersistenceUnit
 internal class QuerydslTest {
 
     @PersistenceUnit
-    lateinit var emf: EntityManagerFactory
+    private lateinit var emf: EntityManagerFactory
 
     @Autowired
     private lateinit var em: EntityManager
 
     lateinit var queryFactory: JPAQueryFactory
+//    private val queryFactory by lazy { JPAQueryFactory(em) }
 
     @BeforeEach
     fun before() {
+
         queryFactory = JPAQueryFactory(em)
 
         val teamA = Team(name = "A")
@@ -43,11 +45,11 @@ internal class QuerydslTest {
         em.persist(teamA)
         em.persist(teamB)
 
-        val member1 = Member().apply { name = "member1"; age = 10; team = teamA }
-        val member2 = Member().apply { name = "member2"; age = 20; team = teamA }
+        val member1 = Member(name = "member1", age = 10, team = teamA)
+        val member2 = Member(name = "member2", age = 20, team = teamA)
 
-        val member3 = Member().apply { name = "member3"; age = 30; team = teamB }
-        val member4 = Member().apply { name = "member4"; age = 40; team = teamB }
+        val member3 = Member(name = "member3", age = 30, team = teamB)
+        val member4 = Member(name = "member4", age = 40, team = teamB)
 
         em.persist(member1)
         em.persist(member2)
